@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DeleteUsers from "./DeleteUsers";
 
 
 const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
@@ -27,13 +28,17 @@ const Users = () => {
         setUsers([...users, newUser]);
     };
 
+    //takes in the id to delete
+    const deleteUser = (deleteId) => {
+        //sets newUsers to filter through users id, if the id is not the deleteId then add to the newUsers list
+        const newUsers = users.filter((i) => i.id !== deleteId);
+            setUsers(newUsers);
+    };
+
     return <section className="user-management">
             <h2>User Management</h2>
 
-            <ul id="users-list">
-              {/* display all existing Users here */}
-              <li>...</li>
-            </ul>
+            <ul id="users-list"> {users.map((user, index) => <li key={index}> { user.name} {user.email} </li> )} </ul>
 
             <div>
               <h3>Add User</h3>
@@ -53,7 +58,10 @@ const Users = () => {
                 <input type="submit" value="Add" />
                 
               </form>
+              
             </div>
+
+            <DeleteUsers deleteUser={deleteUser}/>
 
 
           </section>
