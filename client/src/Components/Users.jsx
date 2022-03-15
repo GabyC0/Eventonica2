@@ -10,7 +10,7 @@ const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
 
 const Users = () => {
 
-    const [users,setUsers] = useState([marlin, nemo, dory]);
+    const [users, setUsers] = useState([marlin, nemo, dory]);
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
