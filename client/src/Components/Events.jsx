@@ -77,8 +77,9 @@ const Events = () => {
 
         const handleSubmit = (e) => {
             e.preventDefault();
-            const newEvent = {initialState};
-            setEvents([...events, newEvent]);
+            // const newEvent = {initialState};
+            //setEvent -> copying what is already there by using ...events
+            setEvents([...events, state]);
         }
     
 
@@ -87,7 +88,7 @@ const Events = () => {
             <div>
               <h3>All Events</h3>
               <ul id="events-list">
-                {events.map((event, index) => <li key={index}>{event.name}: {event.description} </li>)}
+                {events.map((event, index) => <li key={index}>{event.date}<br/>{event.name}: {event.description} </li>)}
               </ul>
 
               <h3>Add Event</h3>
@@ -119,6 +120,7 @@ const Events = () => {
                     type="date"
                     id="add-event-date"
                     value={state.date} onChange={(e) => dispatch({ type: 'editDate', payload: e.target.value})
+                    
             }
                     />
                 </fieldset>
