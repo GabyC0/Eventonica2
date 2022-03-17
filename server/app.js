@@ -6,7 +6,9 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var eventsRouter = require("./routes/events");
+//if I wanted to add additional urls add them 
+//router objects to match urls
 var app = express();
 
 // view engine setup
@@ -23,6 +25,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
+app.use("/events", eventsRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });

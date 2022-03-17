@@ -38,6 +38,9 @@ const event1 = {
             //return our state with new payload/data
             return { ...state, name: action.payload };
         
+        case 'editId':
+            return { ...state, id: action.payload };
+        
         case 'editDescription':
             return { ...state, description: action.payload };
 
@@ -60,7 +63,7 @@ const Events = () => {
         const initialState = {
             id: '',
             name: '',
-            date: null,
+            date: '',
             description: '',
             category: ''
         };
@@ -71,7 +74,7 @@ const Events = () => {
         //useReducer takes in two params
             //reducer -> a function that we perform on our state to get new state
             //an object with an initial state
-        const [state, dispatch] = useReducer(reducer, {initialState});
+        const [state, dispatch] = useReducer(reducer,  initialState );
 
 
 
@@ -79,9 +82,12 @@ const Events = () => {
             e.preventDefault();
             // const newEvent = {initialState};
             //setEvent -> copying what is already there by using ...events
+            //state is the value of initial state
+
             setEvents([...events, state]);
+            console.log([...events, state]);
         }
-    
+    //[event1, event2, event3]
 
     return <section className="event-management">
             <h2>Event Management</h2>
