@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
+//import { response } from '../../../server/app';
 import DeleteUsers from "./DeleteUsers";
 
 
-const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
-const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
-const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
+// const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
+// const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
+// const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
 
 
 
 const Users = () => {
 
-    const [users, setUsers] = useState([marlin, nemo, dory]);
+    const [users, setUsers] = useState([]);
+    
     console.log('users', users);
 
+
+    //access api from react app
     const getUsers = () => {
         fetch('http://localhost:4000/users')
             .then((res) => res.json())
@@ -21,9 +25,24 @@ const Users = () => {
             .then((res) => setUsers(res.users));
     };
 
+    const addUser = (newUser) => {
+        fetch('http://localhost:4000/users', {
+            method: "POST",
+            headers: { Accept: "application/json", 
+            "Content-Type": "application/json" },
+            body: JSON.stringify(newUser)
+        })
+        //Why is this not working here??? Uncaught promise...Has to do with async await??
+        //.then(res => res.json())
+        .then(() => {
+            console.log("Added new user");
+        })
+    };
+
     useEffect(() => {
         //useEffect will run getUsers() every time this component loads, as opposed to just the first time it is rendered
         getUsers();
+        addUser();
     }, []);
 
     const [name, setName] = useState('');
@@ -37,8 +56,9 @@ const Users = () => {
     //All of these states can be definied in the component
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newUser = { id, name, email };
+        const newUser = {id, name, email};
         //users is an array of user objects
+        addUser(newUser)
         setUsers([...users, newUser]);
     };
 
