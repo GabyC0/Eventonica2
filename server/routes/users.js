@@ -22,6 +22,7 @@ router.get('/', function(req, res, next) {
 
 //to add users
 router.post("/", function(req, res, next) {
+  mockUsers.push(req.body);
   const user = {
     name: req.body.name,
     email: req.body.id,

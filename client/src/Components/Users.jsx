@@ -42,7 +42,6 @@ const Users = () => {
     useEffect(() => {
         //useEffect will run getUsers() every time this component loads, as opposed to just the first time it is rendered
         getUsers();
-        addUser();
     }, []);
 
     const [name, setName] = useState('');
