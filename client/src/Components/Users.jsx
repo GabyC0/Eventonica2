@@ -62,6 +62,8 @@ const Users = () => {
         //users is an array of user objects
         addUser(newUser)
         setUsers([...users, newUser]);
+        setName('');
+        setEmail('');
     };
 
     //takes in the id to delete
@@ -107,7 +109,7 @@ const Users = () => {
                 {/* Add more form fields here */}
                     {/* <label>ID</label>
                     <input type="number" id="add-user-id" value={id} onChange={(e) => setId(e.target.value)} /><br/> */}
-
+                    <br/>
                     <label>Email</label>
                     <input type="email" id="add-user-email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 </fieldset>

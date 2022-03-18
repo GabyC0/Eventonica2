@@ -20,7 +20,7 @@ function App() {
           <Events/>
         </div>
 
-        <div>
+        <div className="delete-users">
           <h3>Delete Event</h3>
           <form id="delete-event" action="#">
             <fieldset>

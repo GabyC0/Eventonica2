@@ -1,3 +1,22 @@
+body {
+  margin-left: 150px;
+  margin-right: 150px;
+  margin-bottom: 150px;
+}
+
+.user-and-events {
+  width: 33%;
+  margin-left: 100px;
+}
+
+.delete-users {
+ width: 33%;
+}
+
+.search-toolbar {
+  width: 33%;
+}
+
 fieldset {
   border: none;
   margin: 1rem 0;
@@ -7,6 +26,7 @@ header {
   /* For more about flexbox, see https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
   display: flex;
   align-items: center;
+  background-color: aqua;
 }
 
 header img {
@@ -14,9 +34,23 @@ header img {
   margin-right: 1em;
 }
 
+h1, h2 {
+  font-family: 'Hubballi', cursive;
+}
+
+h3 {
+  font-family: 'Varela Round', sans-serif;
+  text-decoration: underline;
+}
+
+label {
+  font-family: 'Architects Daughter', cursive;
+  padding-right: 5px;
+}
+
 main {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 aside {
