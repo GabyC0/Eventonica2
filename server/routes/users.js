@@ -1,13 +1,25 @@
 var express = require('express');
 var router = express.Router();
+var db = require('../db/db-connection.js');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+//defined middleware
+router.get('/', async function (req, res, next) {
+
+  try {
+    const users = await db.any('SELECT * FROM users', [true]);
+    console.log("logging  users", users);
+    res.send(users);
+  } catch (e) {
+    console.log('catch anything wrong', e);
+    return res.status(400).json({ e });
+
+  }
   //res.send('respond with a resource');
-  console.log(req.body, 'the body');
+  //console.log(req.body, 'the body');
   //The example response returns { users: [array of users] } instead of just res.json(users)
   //naming the user object users is a more clear way of presenting this information
-  res.json({ users: mockUsers });
+  //res.json({ users: mockUsers });
 });
 
 //practice
@@ -21,14 +33,23 @@ router.get('/', function(req, res, next) {
 // });
 
 //to add users
-router.post("/", function(req, res, next) {
-  mockUsers.push(req.body);
+router.post("/", async function(req, res, next) {
+  //mockUsers.push(req.body);
   const user = {
     name: req.body.name,
-    email: req.body.id,
+    email: req.body.email,
   };
   console.log(user);
-  res.send(req.body);
+  //res.send(req.body);
+  try {
+    const createdUser = await db.one(
+      'INSERT INTO users(name, email) VALUES($1, $2) RETURNING *',
+      [user.name, user.email]
+    );
+    console.log(createdUser);
+  } catch (e) {
+    return res.status(400).json({e});
+  }
 });
 
 module.exports = router;

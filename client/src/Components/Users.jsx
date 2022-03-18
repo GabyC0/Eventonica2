@@ -22,7 +22,10 @@ const Users = () => {
             .then((res) => res.json())
             //res is an object with key users
             //keep states as specific as possible
-            .then((res) => setUsers(res.users));
+            .then((users) => {
+                console.log("res", users);
+                setUsers(users);
+            });
     };
 
     const addUser = (newUser) => {
@@ -55,7 +58,7 @@ const Users = () => {
     //All of these states can be definied in the component
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newUser = {id, name, email};
+        const newUser = {name, email};
         //users is an array of user objects
         addUser(newUser)
         setUsers([...users, newUser]);
