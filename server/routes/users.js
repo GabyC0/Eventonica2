@@ -52,13 +52,26 @@ router.post("/", async function(req, res, next) {
   }
 });
 
+
+router.delete("/:id", async (req, res) => {
+  //: acts as a placeholder
+  const userId = req.params.id;
+  try {
+    await db.none("DELETE FROM users WHERE id=$1", [userId]);
+    res.send({ status: "success" });
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+
 module.exports = router;
 
-let mockUsers = [
-  { id: 1, name: 'Marlin', email: 'marlin@gmail.com' },
-  { id: 2, name: 'Nemo', email: 'nemo@gmail.com' },
-  { id: 3, name: 'Dory', email: 'dory@gmail.com' }
-];
+// let mockUsers = [
+//   { id: 1, name: 'Marlin', email: 'marlin@gmail.com' },
+//   { id: 2, name: 'Nemo', email: 'nemo@gmail.com' },
+//   { id: 3, name: 'Dory', email: 'dory@gmail.com' }
+// ];
 
 // let otherUsers = [
 //   { name: 'Marlin', email: 'marlin@gmail.com', id: '1' },

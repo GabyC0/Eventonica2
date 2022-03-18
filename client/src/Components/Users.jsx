@@ -65,10 +65,31 @@ const Users = () => {
     };
 
     //takes in the id to delete
-    const deleteUser = (deleteId) => {
+    const deleteUser = (id) => {
+        fetch(`http://localhost:4000/users/${id}`, {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            //why is this showing in the path??
+            // body: JSON.stringify(id)
+        })
+        //Why is this not working here??? Uncaught promise...Has to do with async await??
+        //.then(res => res.json())
+        // .then(() => {
+        //     console.log("Deleted user");
+        // })
+        .then(response => response.json())
+            .then(data => {
+             console.log('Success:', data);
+                // if success, do the following
+                const newUsers = users.filter((i) => i.id !== id);
+                setUsers(newUsers);
+            })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
         //sets newUsers to filter through users id, if the id is not the deleteId then add to the newUsers list
-        const newUsers = users.filter((i) => i.id !== deleteId);
-            setUsers(newUsers);
+        // const newUsers = users.filter((i) => i.id !== id);
+        //     setUsers(newUsers);
     };
 
     return <section className="user-management">
@@ -84,8 +105,8 @@ const Users = () => {
                   <input type="text" id="add-user-name" value={name} onChange={(e) => setName(e.target.value)} /><br/>
 
                 {/* Add more form fields here */}
-                    <label>ID</label>
-                    <input type="number" id="add-user-id" value={id} onChange={(e) => setId(e.target.value)} /><br/>
+                    {/* <label>ID</label>
+                    <input type="number" id="add-user-id" value={id} onChange={(e) => setId(e.target.value)} /><br/> */}
 
                     <label>Email</label>
                     <input type="email" id="add-user-email" value={email} onChange={(e) => setEmail(e.target.value)}/>
